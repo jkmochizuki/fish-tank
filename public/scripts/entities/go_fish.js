@@ -1,14 +1,17 @@
+// Subclass of Fish
+
 class GoFish extends Fish {
 
   constructor(options) {
     super(options);
+    this.imageUri = '/images/go-fish.png';
     this.surgeSecondsLeft = 0;
     this.maxSurge = 1.0;
     this.surgMult = 3.0;
   }
 
   updateOneTick() {
-    var delta = this.swimVelocity.scale(PHYSICS_TICK_SIZE_S * (1 + this.surgeSecondsLeft * this.surgMult));
+    let delta = this.swimVelocity.scale(PHYSICS_TICK_SIZE_S * (1 + this.surgeSecondsLeft * this.surgMult));
     this.position.addMut(delta);
     this.timeUntilSpeedChange -= PHYSICS_TICK_SIZE_S;
     if (this.timeUntilSpeedChange < 0) {

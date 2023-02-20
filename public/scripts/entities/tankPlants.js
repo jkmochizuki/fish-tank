@@ -1,17 +1,11 @@
-// Fish: The superclass for all the fish that appear on the screen
-// All the setup code that any moving fish in the fishtank will need.
-// Subclasses of Fish:
-// GoFish: A fish the speeds up when you click it
-// SwitchFish: A fish that changes direction when you click it
 
-class Fish extends Denizen {
+class TankPlants extends Denizen {
 
   constructor(options) {
     super(options);
-    this.imageUri = '/images/fish01.png';
-    this.maxSwimSpeed = 100;
+    this.imageUri = '/images/plant.png';
+    this.maxSwimSpeed = 50;
     this.makeNewVelocity();
-    this.isTasty = true;
   }
 
   generateSwimVelocity(max, min) {
@@ -26,9 +20,9 @@ class Fish extends Denizen {
   }
 
   updateOneTick() {
-    let delta = this.swimVelocity.scale(PHYSICS_TICK_SIZE_S);
+    let delta = this.swimVelocity.scale(PHYSICS_TICK_SIZE_S * 2);
     this.position.addMut(delta);
-    this.timeUntilSpeedChange -= PHYSICS_TICK_SIZE_S;
+    this.timeUntilSpeedChange -= PHYSICS_TICK_SIZE_S * 3;
     if (this.timeUntilSpeedChange < 0) {
       this.makeNewVelocity();
     }
@@ -36,7 +30,7 @@ class Fish extends Denizen {
 
   makeNewVelocity(minMag) {
     this.swimVelocity = this.generateSwimVelocity(this.maxSwimSpeed, minMag || 0);
-    this.timeUntilSpeedChange = randRangeInt(5);
+    this.timeUntilSpeedChange = randRangeInt(10);
   }
 
 }
